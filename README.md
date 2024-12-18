@@ -8,10 +8,16 @@ Features:
   Breadth-First-Search , Preorder, Inorder, and Postorder Traversal
 
 Upcoming Features:
+  
   Toggle app Dark Mode
+  
   Toggle AVL and non-AVL BST
+  
   Search Node
+  
   Minimum Node
+  
   Maximum Node
+  
   Heigt/Depth of Node
   
