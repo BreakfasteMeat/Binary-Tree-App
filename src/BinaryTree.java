@@ -2,25 +2,48 @@
 public class BinaryTree{
     private Node root;
     private int size;
+    boolean isAVL;
 
     public BinaryTree(){
+        isAVL = true;
         size = 0;
     }
 
     private Node insert_recursive(int elem, Node node){
+        Node n = null;
         if(node == null){
             size++;
-            return new Node(elem);
+            n = new Node(elem);
         } else if(node.elem > elem){
             node.left = insert_recursive(elem, node.left);
             node.left.parent = node;
+            n = node;
 
         } else if(node.elem < elem){
             node.right = insert_recursive(elem, node.right);
             node.right.parent = node;
-
+            n = node;
         }
-        return node;
+        if(!isAVL) {
+            return n;
+        }
+
+
+        //AVL CODE
+        int balance;
+        if(node == null) {
+            return n;
+        }
+        balance = node.getBalance();
+        if(balance < -1){
+            if(node.right.right == null){
+                node.right = RRotate(node.right.left);
+            }
+            n = LRotate(node);
+        }
+
+
+        return n;
     }
     private Node findMin(Node node){
         while(node.left != null){
@@ -124,17 +147,52 @@ public class BinaryTree{
         }
 
         if (node == root && node.parent != null) {
+            System.out.println("Root-parent relationship bonkers!");
             return false;
         }
 
         if (node.left != null && node.left.parent != node) {
+            System.out.println(node.left.elem + " parent is not " + node.elem + " but is " + node.left.parent.elem);
             return false;
         }
 
         if (node.right != null && node.right.parent != node) {
+            System.out.println(node.right.elem + " parent is not " + node.elem + " but is " + node.right.parent.elem);
             return false;
         }
         return checkParent(node.left) && checkParent(node.right);
+    }
+
+    public Node LRotate(Node node){
+        Node subTree1 = node.right.left;
+        Node right = node.right;
+        node.parent = right;
+        node.right.left = node;
+        node.right = subTree1;
+        if(subTree1 != null){
+            subTree1.parent = node;
+        }
+
+        return right;
+    }
+    public Node RRotate(Node node){
+        Node subTree1 = node.left.right;
+        Node left = node.left;
+        node.parent = left;
+        node.left.right = node;
+        node.left = subTree1;
+        if(subTree1 != null){
+            subTree1.parent = node;
+        }
+        return left;
+    }
+    public Node RLRotate(Node node){
+        Node right = node.right;
+        node.right = node.right.left;
+        node.right.parent = node;
+        node.right.right = right;
+
+        return right;
     }
 
 

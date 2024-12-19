@@ -10,7 +10,7 @@ Features:
 Upcoming Features:
   
     Toggle app Dark Mode
-    Toggle AVL and non-AVL BST
+    Toggle AVL and non-AVL BST - (Currently in-progress)
     Search Node
     Minimum Node
     Maximum Node

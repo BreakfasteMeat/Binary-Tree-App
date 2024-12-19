@@ -30,5 +30,19 @@ public class Node {
         }
         return 1 + parent.depth();
     }
+    public int getBalance(){
+        int lHeight = -1;
+        int rHeight = -1;
+        if(this == null){
+            return 0;
+        }
+        if(left != null){
+            lHeight = left.height();
+        }
+        if(right != null){
+            rHeight = right.height();
+        }
+        return lHeight - rHeight;
+    }
 
 }
