@@ -11,6 +11,9 @@ public class BinaryTreeModel {
     public void clearTree(){
         tree = new BinaryTree();
     }
+    public boolean search_value(int value){
+        return tree.search(value);
+    }
     public void checkTreeParent(){
         if(!tree.checkParent(tree.getRoot())){
             System.out.println("Something went wrong with parent node relationship!");

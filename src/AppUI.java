@@ -39,11 +39,17 @@ public class AppUI {
             frame.repaint();
         });
         controller.getAdd5RandomValuesButton().addActionListener(e -> {
-            ((BinaryTreeGUI) treePanel).getModel().insert(new Random().nextInt(0,100));
-            ((BinaryTreeGUI) treePanel).getModel().insert(new Random().nextInt(0,100));
-            ((BinaryTreeGUI) treePanel).getModel().insert(new Random().nextInt(0,100));
-            ((BinaryTreeGUI) treePanel).getModel().insert(new Random().nextInt(0,100));
-            ((BinaryTreeGUI) treePanel).getModel().insert(new Random().nextInt(0,100));
+            int ctr = 0;
+            while(ctr < 5) {
+
+                int rand = new Random().nextInt(0,101);
+
+                if(!((BinaryTreeGUI)treePanel).getModel().search_value(rand)) {
+                    System.out.println(ctr);
+                    ctr++;
+                    ((BinaryTreeGUI)treePanel).getModel().insert(rand);
+                }
+            }
             treePanel.repaint();
             frame.repaint();
         });

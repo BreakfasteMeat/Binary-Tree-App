@@ -9,6 +9,22 @@ public class BinaryTree{
         size = 0;
     }
 
+    public boolean search(int key){
+        return search_recrusive(key,root);
+    }
+    private boolean search_recrusive(int key, Node n){
+        if(n == null){
+            return false;
+        } else if(key > n.elem){
+            return search_recrusive(key,n.right);
+        } else if(key < n.elem){
+            return search_recrusive(key,n.left);
+        } else if(key == n.elem){
+            return true;
+        }
+        return false;
+    }
+
     private Node insert_recursive(int elem, Node node){
         Node n = null;
         if(node == null){
@@ -35,11 +51,16 @@ public class BinaryTree{
             return n;
         }
         balance = node.getBalance();
-        if(balance < -1){
-            if(node.right.right == null){
-                node.right = RRotate(node.right.left);
-            }
+        if(balance < -1 && elem > node.right.elem){
             n = LRotate(node);
+        } else if(balance > 1 && elem < node.left.elem){
+            n = RRotate(node);
+        } else if(balance < -1 && elem < node.right.elem){
+            node.right = RRotate(node.right);
+            n = LRotate(node);
+        } else if(balance > 1 && elem > node.left.elem){
+            node.left = LRotate(node.left);
+            n = RRotate(node);
         }
 
 
@@ -68,27 +89,20 @@ public class BinaryTree{
     }
     private Node remove_helper(Node node, int elem){
         if (elem < node.elem) {
-            // Recur to the left subtree
             node.left = remove_helper(node.left, elem);
         } else if (elem > node.elem) {
-            // Recur to the right subtree
             node.right = remove_helper(node.right, elem);
         } else {
-            // Node to be removed found
             if (node.left != null && node.right != null) {
-                // Case 1: Node with two children
                 Node successor = findMin(node.right); // Find in-order successor
                 node.elem = successor.elem; // Replace with successor's value
                 node.right = remove_helper(node.right, successor.elem); // Remove successor
             } else if (node.left != null) {
-                // Case 2: Node with only left child
                 return node.left; // Replace node with left child
             } else if (node.right != null) {
-                // Case 3: Node with only right child
-                return node.right; // Replace node with right child
+                return node.right;
             } else {
-                // Case 4: Leaf node
-                return null; // Remove the node
+                return null;
             }
         }
         return node;
@@ -185,14 +199,6 @@ public class BinaryTree{
             subTree1.parent = node;
         }
         return left;
-    }
-    public Node RLRotate(Node node){
-        Node right = node.right;
-        node.right = node.right.left;
-        node.right.parent = node;
-        node.right.right = right;
-
-        return right;
     }
 
 
