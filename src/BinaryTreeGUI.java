@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -10,12 +11,13 @@ public class BinaryTreeGUI extends JPanel{
     public BinaryTreeGUI(){
         model = new BinaryTreeModel();
         label = new JLabel();
+        Font font = new Font("Arial", Font.BOLD, 20);
         label.setText("");
-        JPanel labelPanel = new JPanel();
-        labelPanel.setLayout(new FlowLayout());
+        label.setFont(font);
+        label.setForeground(AppSettings.fontColor);
+        label.setBorder(new EmptyBorder(20,20,20,20));
         setLayout(new BorderLayout());
-        labelPanel.add(label);
-        add(labelPanel, BorderLayout.SOUTH);
+        add(label,BorderLayout.SOUTH);
     }
 
     public BinaryTreeModel getModel() {
@@ -49,8 +51,9 @@ public class BinaryTreeGUI extends JPanel{
         g.fillOval(x-13,y-13,26,26);
         g.setColor(AppSettings.fontColor);
         g.setFont(new Font("Monospaced", Font.PLAIN, 9));
-
-        g.drawString(Integer.toString(node.elem),x - 7,y + 3);
+        g.drawString(node.elem + "",x - 7,y + 3);
+        g.drawString("height:" + node.height(),x - 25,y + 20);
+        g.drawString("depth: " + node.depth(),x - 25,y + 30);
         g.setColor(AppSettings.edgeColor);
     }
 

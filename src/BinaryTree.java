@@ -2,15 +2,23 @@
 public class BinaryTree{
     private Node root;
     private int size;
-    public BinaryTree(){}
+
+    public BinaryTree(){
+        size = 0;
+    }
 
     private Node insert_recursive(int elem, Node node){
         if(node == null){
+            size++;
             return new Node(elem);
         } else if(node.elem > elem){
             node.left = insert_recursive(elem, node.left);
+            node.left.parent = node;
+
         } else if(node.elem < elem){
             node.right = insert_recursive(elem, node.right);
+            node.right.parent = node;
+
         }
         return node;
     }
@@ -85,6 +93,7 @@ public class BinaryTree{
     //Insert Value in BST
     public void insert(int elem){
         root = insert_recursive(elem, root);
+        root.parent = null;
     }
 
     public void remove(int elem){
@@ -109,5 +118,24 @@ public class BinaryTree{
             printTree(prefix + "|  ", n.right, false);
         }
     }
+    public boolean checkParent(Node node) {
+        if (node == null) {
+            return true;
+        }
+
+        if (node == root && node.parent != null) {
+            return false;
+        }
+
+        if (node.left != null && node.left.parent != node) {
+            return false;
+        }
+
+        if (node.right != null && node.right.parent != node) {
+            return false;
+        }
+        return checkParent(node.left) && checkParent(node.right);
+    }
+
 
 }
