@@ -10,7 +10,7 @@ public class AppUI {
 
     public AppUI() {
         frame = new JFrame();
-        frame.setTitle("App UI");
+        frame.setTitle("Binary Tree Visualizer");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(1280, 720);
         frame.setLayout(new BorderLayout());
@@ -66,6 +66,12 @@ public class AppUI {
             ((BinaryTreeGUI)treePanel).showDFS_Inorder();
         });
         controller.getClearTreeButton().addActionListener(e -> {
+            ((BinaryTreeGUI)treePanel).clearTree();
+            treePanel.repaint();
+            System.gc();
+        });
+        controller.getAvlTreeButton().addActionListener(e -> {
+            ((BinaryTreeGUI)treePanel).getModel().getTree().setAVL(controller.getAvlTreeButton().isSelected());
             ((BinaryTreeGUI)treePanel).clearTree();
             treePanel.repaint();
             System.gc();

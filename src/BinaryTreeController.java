@@ -11,6 +11,7 @@ public class BinaryTreeController {
     private JButton postorderDFSButton;
     private JButton inorderDFSButton;
     private JButton clearTreeButton;
+    private JRadioButton avlTreeButton;
 
     public JPanel getContentPanel() {
         return ContentPanel;
@@ -19,6 +20,8 @@ public class BinaryTreeController {
     public JButton getClearTreeButton() {
         return clearTreeButton;
     }
+
+
 
     public JTextField getValueTextField() {
         return valueTextField;
@@ -50,5 +53,9 @@ public class BinaryTreeController {
 
     public JButton getInorderDFSButton() {
         return inorderDFSButton;
+    }
+
+    public JRadioButton getAvlTreeButton() {
+        return avlTreeButton;
     }
 }

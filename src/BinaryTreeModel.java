@@ -9,7 +9,9 @@ public class BinaryTreeModel {
     }
 
     public void clearTree(){
+        boolean isAVL = tree.isAVL;
         tree = new BinaryTree();
+        tree.setAVL(isAVL);
     }
     public boolean search_value(int value){
         return tree.search(value);

@@ -5,8 +5,12 @@ public class BinaryTree{
     boolean isAVL;
 
     public BinaryTree(){
-        isAVL = true;
+        isAVL = false;
         size = 0;
+    }
+
+    public void setAVL(boolean AVL) {
+        isAVL = AVL;
     }
 
     public boolean search(int key){
